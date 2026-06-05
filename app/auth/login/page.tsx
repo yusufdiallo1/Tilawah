@@ -1,4 +1,4 @@
-import { signInWithEmail, signUpWithEmail, signInWithGoogle } from "../actions";
+import { signInWithEmail, signUpWithEmail } from "../actions";
 
 export const metadata = { title: "Sign in · Tilāwah" };
 
@@ -74,20 +74,6 @@ export default function LoginPage({
           </div>
         </form>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "18px 0" }}>
-          <span style={{ flex: 1, height: 1, background: "rgba(16,40,30,.12)" }} />
-          <span style={{ fontSize: 11, color: "#9aa7a2", fontWeight: 600 }}>OR</span>
-          <span style={{ flex: 1, height: 1, background: "rgba(16,40,30,.12)" }} />
-        </div>
-
-        {/* Google OAuth */}
-        <form action={signInWithGoogle}>
-          <input type="hidden" name="next" value={next} />
-          <button type="submit" style={btnGoogle}>
-            <GoogleIcon /> Continue with Google
-          </button>
-        </form>
-
         <div style={{ textAlign: "center", marginTop: 18, fontSize: 12.5, color: "#5d6b66" }}>
           <a href="/" style={{ color: "#1ba35e", fontWeight: 600, textDecoration: "none" }}>
             ← Back home
@@ -138,21 +124,6 @@ const btnGhost: React.CSSProperties = {
   fontWeight: 700,
   fontSize: 14,
 };
-const btnGoogle: React.CSSProperties = {
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 9,
-  padding: "11px 0",
-  borderRadius: 12,
-  border: "1px solid rgba(16,40,30,.14)",
-  cursor: "pointer",
-  background: "#fff",
-  color: "#16201d",
-  fontWeight: 700,
-  fontSize: 14,
-};
 function banner(color: string, bg: string): React.CSSProperties {
   return {
     fontSize: 12.5,
@@ -163,15 +134,4 @@ function banner(color: string, bg: string): React.CSSProperties {
     marginBottom: 14,
     lineHeight: 1.4,
   };
-}
-
-function GoogleIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden>
-      <path fill="#FFC107" d="M43.6 20.5h-1.9V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 4.6 29.5 2.5 24 2.5 12.1 2.5 2.5 12.1 2.5 24S12.1 45.5 24 45.5 45.5 35.9 45.5 24c0-1.2-.1-2.3-.3-3.5z" />
-      <path fill="#FF3D00" d="M5.3 14.7l6.6 4.8C13.6 15.6 18.4 12.5 24 12.5c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 4.6 29.5 2.5 24 2.5 16.3 2.5 9.6 6.9 5.3 14.7z" />
-      <path fill="#4CAF50" d="M24 45.5c5.4 0 10.3-2.1 14-5.5l-6.5-5.3c-2 1.4-4.6 2.3-7.5 2.3-5.2 0-9.6-3.3-11.2-7.9l-6.6 5.1C9.5 41 16.2 45.5 24 45.5z" />
-      <path fill="#1976D2" d="M43.6 20.5H24v8h11.3c-.8 2.2-2.1 4.1-3.8 5.4l6.5 5.3c-.5.4 7-5.1 7-15.2 0-1.2-.1-2.3-.4-3.5z" />
-    </svg>
-  );
 }

@@ -43,13 +43,3 @@ export async function signUpWithEmail(formData: FormData) {
   redirect(`/auth/login?message=${encodeURIComponent("Check your email to confirm your account.")}`);
 }
 
-export async function signInWithGoogle(formData: FormData) {
-  const next = safeNext(formData);
-  const supabase = createClient();
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: `${originFromHeaders()}/auth/callback?next=${encodeURIComponent(next)}` },
-  });
-  if (error) redirect(`/auth/login?error=${encodeURIComponent(error.message)}`);
-  if (data.url) redirect(data.url);
-}
