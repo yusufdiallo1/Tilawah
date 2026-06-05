@@ -6,3 +6,6 @@
 .DS_Store
 .env*.local
 next-env.d.ts
+tsconfig.tsbuildinfo
+*.bak
+/my-quran-app
