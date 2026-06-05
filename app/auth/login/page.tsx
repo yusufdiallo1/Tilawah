@@ -1,4 +1,5 @@
 import { signInWithEmail, signUpWithEmail } from "../actions";
+import DeviceFrame from "../../_components/DeviceFrame";
 
 export const metadata = { title: "Sign in · Tilāwah" };
 
@@ -10,9 +11,12 @@ export default function LoginPage({
   const next = searchParams.next && searchParams.next.startsWith("/") ? searchParams.next : "/home";
   const signupMode = searchParams.mode === "signup";
   return (
+    <DeviceFrame>
     <div
       style={{
-        minHeight: "100dvh",
+        minHeight: "100%",
+        height: "100%",
+        boxSizing: "border-box",
         display: "grid",
         placeItems: "center",
         padding: 24,
@@ -81,6 +85,7 @@ export default function LoginPage({
         </div>
       </div>
     </div>
+    </DeviceFrame>
   );
 }
 
