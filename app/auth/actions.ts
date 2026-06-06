@@ -48,6 +48,7 @@ export async function signInWithEmail(formData: FormData) {
 export async function signUpWithEmail(formData: FormData) {
   const email = String(formData.get("email") || "");
   const password = String(formData.get("password") || "");
+  const displayName = String(formData.get("display_name") || "").trim().slice(0, 60);
   const next = safeNext(formData);
   if (await isBanned(email)) {
     redirect(`/?mode=signup&error=${encodeURIComponent("This account is banned.")}`);
@@ -56,7 +57,10 @@ export async function signUpWithEmail(formData: FormData) {
   const { error } = await supabase.auth.signUp({
     email,
     password,
-    options: { emailRedirectTo: `${originFromHeaders()}/auth/callback?next=${encodeURIComponent(next)}` },
+    options: {
+      emailRedirectTo: `${originFromHeaders()}/auth/callback?next=${encodeURIComponent(next)}`,
+      data: displayName ? { display_name: displayName } : undefined,
+    },
   });
   if (error) redirect(`/?mode=signup&error=${encodeURIComponent(error.message)}`);
   redirect(`/?message=${encodeURIComponent("Check your email to confirm your account.")}`);

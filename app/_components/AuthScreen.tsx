@@ -70,6 +70,12 @@ export default function AuthScreen({
 
             <form>
               <input type="hidden" name="next" value={next} />
+              {signupMode && (
+                <>
+                  <label style={lbl}>Name</label>
+                  <input name="display_name" type="text" autoComplete="name" placeholder="Your name" style={inp} />
+                </>
+              )}
               <label style={lbl}>Email</label>
               <input name="email" type="email" required autoComplete="email" style={inp} />
               <label style={lbl}>Password</label>
