@@ -9,7 +9,7 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from("halaqat")
-    .select("id, owner_id, name, type, visibility, code, capacity, recurring, meet_time, cancelled_for, created_at")
+    .select("id, owner_id, name, type, visibility, code, capacity, recurring, meet_time, note_taker, cancelled_for, created_at")
     .order("created_at", { ascending: false });
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
@@ -68,6 +68,7 @@ export async function POST(request: Request) {
       capacity: Math.min(100, Math.max(2, Number(body.capacity) || 8)),
       recurring: body.recurring !== false,
       meet_time: body.meet_time || null,
+      note_taker: body.note_taker === true,
     })
     .select()
     .single();

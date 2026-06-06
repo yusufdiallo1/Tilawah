@@ -12,6 +12,7 @@ create table if not exists public.halaqat (
   capacity    int  not null default 8 check (capacity between 2 and 100),
   recurring   boolean not null default true,
   meet_time   text,                                -- e.g. "05:30"
+  note_taker  boolean not null default false,      -- host enabled the note-taker bot
   cancelled_for date,                              -- set when host cancels for a given day
   created_at  timestamptz not null default now()
 );
