@@ -29,13 +29,13 @@ export async function updateSession(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const isAuthed = !!user;
-  // Signed-in users belong in the app (/home); the marketing page lives at "/".
-  if (isAuthed && path === "/") {
-    const url = request.nextUrl.clone(); url.pathname = "/home"; return NextResponse.redirect(url);
+  // "/" and /auth/login are the sign-in screen. Signed-in users belong in /home.
+  if (isAuthed && (path === "/" || path === "/auth/login")) {
+    const url = request.nextUrl.clone(); url.pathname = "/home"; url.search = ""; return NextResponse.redirect(url);
   }
-  // The app (/home) and account areas require sign-in.
+  // The app (/home) requires sign-in → send guests to the sign-in screen at "/".
   if (!isAuthed && (path === "/home" || path.startsWith("/home/"))) {
-    const url = request.nextUrl.clone(); url.pathname = "/auth/login"; url.searchParams.set("next", path); return NextResponse.redirect(url);
+    const url = request.nextUrl.clone(); url.pathname = "/"; url.searchParams.set("next", path); return NextResponse.redirect(url);
   }
 
   return response;

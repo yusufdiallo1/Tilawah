@@ -24,7 +24,7 @@ export async function signInWithEmail(formData: FormData) {
   const next = safeNext(formData);
   const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) redirect(`/auth/login?error=${encodeURIComponent(error.message)}`);
+  if (error) redirect(`/?error=${encodeURIComponent(error.message)}`);
   revalidatePath("/", "layout");
   redirect(next);
 }
@@ -39,7 +39,7 @@ export async function signUpWithEmail(formData: FormData) {
     password,
     options: { emailRedirectTo: `${originFromHeaders()}/auth/callback?next=${encodeURIComponent(next)}` },
   });
-  if (error) redirect(`/auth/login?mode=signup&error=${encodeURIComponent(error.message)}`);
-  redirect(`/auth/login?message=${encodeURIComponent("Check your email to confirm your account.")}`);
+  if (error) redirect(`/?mode=signup&error=${encodeURIComponent(error.message)}`);
+  redirect(`/?message=${encodeURIComponent("Check your email to confirm your account.")}`);
 }
 

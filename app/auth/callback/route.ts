@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const error = searchParams.get("error_description") || searchParams.get("error");
 
   if (error) {
-    return NextResponse.redirect(`${origin}/auth/login?error=${encodeURIComponent(error)}`);
+    return NextResponse.redirect(`${origin}/?error=${encodeURIComponent(error)}`);
   }
 
   if (code) {
@@ -24,9 +24,9 @@ export async function GET(request: Request) {
       return NextResponse.redirect(`${origin}${next}`);
     }
     return NextResponse.redirect(
-      `${origin}/auth/login?error=${encodeURIComponent(exchangeError.message)}`,
+      `${origin}/?error=${encodeURIComponent(exchangeError.message)}`,
     );
   }
 
-  return NextResponse.redirect(`${origin}/auth/login?error=Missing%20auth%20code`);
+  return NextResponse.redirect(`${origin}/?error=Missing%20auth%20code`);
 }
